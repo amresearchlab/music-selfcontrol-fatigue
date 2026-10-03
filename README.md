@@ -28,15 +28,15 @@ Participants classified words according to a heart or cross cue, switching betwe
 
 ### Incongruent Colour-Word Stroop Task
 
-<p align="center"><img src="stroop_stimuli_example.png" alt="Examples of incongruent Stroop stimuli at the top and neutral stimuli at the bottom" width="100%"></p>
+<p align="center"><img src="stroop-task-instructions.png" alt="Instructions for the Stroop task, including a colour-word example and the response-key mappings" width="100%"></p>
 
-*Illustrative example only: the image shows incongruent (top) and neutral (bottom) stimuli, not the exact congruent and incongruent trials used in this study. Image by [Unreferierbar via Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Stroop_stimuli_example.png), dedicated to the public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).*
+*The task instructed participants to identify the ink colour while ignoring the word. In the example, “GREEN” is printed in red, so participants should press “r”; the other response keys are “g”, “b”, and “y” for green, blue, and yellow.*
 
 The study used the Incongruent Colour-Word Stroop Task as a behavioural measure of self-control fatigue, a common use of the Stroop task. Participants responded to the ink colour of colour words on congruent and incongruent trials. The Stroop effect was calculated as reaction time (RT) on incongruent trials minus RT on congruent trials; a larger difference indicates greater response interference, poorer performance, and a higher level of self-control fatigue.
 
 Because the Stroop task can also induce fatigue, it was administered after the 30-minute reading session so that it functioned as an outcome measure. The experiment was implemented in PsyToolkit. The paper also assessed fatigue using pre- and post-session self-reports on the Motivation for Cognition State Scale.
 
-[Stroop task files and code](psytoolkit-stroop-task/)
+[Stroop task files](psytoolkit-stroop-task/) · [Task documentation and provenance](psytoolkit-stroop-task/readme.md)
 
 ## Running and Modifying
 
