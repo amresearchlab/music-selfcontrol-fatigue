@@ -1,4 +1,13 @@
 bitmaps #list of documents used in the experiment
+
+  # Task properties reference: Garrison et al. (2019). Ego depletion reduces attention control: Evidence from two high-powered preregistered experiments.
+## Trials = (10 congruent, 30 incongruent) X 3 blocks 
+
+options
+  fullscreen
+  resolution 1000 800
+
+bitmaps
   newinstruction1
   newinstruction2
   newinstruction3
@@ -28,26 +37,49 @@ fonts
 
 # table: write condition,stimulus,response
 
-table stroop
-  "yellow yellow 1" yellowyellow 4
+table stroop_incong
   "yellow green  0" yellowgreen  2
   "yellow blue   0" yellowblue   3
   "yellow red    0" yellowred    1
   "red yellow    0" redyellow    4
   "red green     0" redgreen     2
   "red blue      0" redblue      3
-  "red red       1" redred       1
   "green yellow  0" greenyellow  4
-  "green green   1" greengreen   2
   "green blue    0" greenblue    3
   "green red     0" greenred     1
   "blue yellow   0" blueyellow   4
   "blue green    0" bluegreen    2
-  "blue blue     1" blueblue     3
   "blue red      0" bluered      1
 
-task stroop
-  table stroop
+table stroop_cong
+  "yellow yellow 1" yellowyellow 4
+  "red red       1" redred       1
+  "green green   1" greengreen   2
+  "blue blue     1" blueblue     3
+
+task stroop_incong
+  table stroop_incong 
+  keys r g b y
+  delay 500
+  show bitmap fixpoint # stimulus 1
+  delay 200
+  clear 1 # remove fixpoint 
+  delay 100
+  show bitmap @2 # stimulus 2
+  readkey @3 2000000000000000
+  clear 2 # remove stimulus 2
+  if STATUS == CORRECT
+    show bitmap correct # stimulus 3 (feedback)
+  fi
+  if STATUS != CORRECT  # stimulus 3 (feedback)
+    show bitmap mistake
+  fi
+  delay 500
+  clear 3 # remove feedback stimulus
+  save BLOCKNAME @1 TABLEROW KEY STATUS RT
+
+task stroop_cong
+  table stroop_cong
   keys r g b y
   delay 500
   show bitmap fixpoint # stimulus 1
@@ -75,11 +107,12 @@ message newinstructiongetready
 
 block training
   tasklist
-    stroop 1  # run the stroop task 1 trials.
+    stroop_incong 3  # run the stroop task 3 trials.
+    stroop_cong 2  # run the stroop task 2 trials.
   end
   feedback
     text 0 0  "Training finished."
-    text 0 200 "<press spacebar to continue>"
+    text 0 200 ""
   end
 
 message newinstruction3
@@ -88,7 +121,8 @@ message newinstructiongetready
 
 block realtest
   tasklist
-    stroop 1  # run the stroop task 1 trials.
+    stroop_incong 90  # run the stroop task 90 trials.
+    stroop_cong 30  # run the stroop task 30 trials.
   end
   feedback
     #text -100 0  "Your speed in correct trials"
@@ -98,6 +132,7 @@ block realtest
     #text -100 50  &StroopCon ; prefix "congruent:   " ; postfix " ms"
     #text -100 100 &StroopInc ; prefix "incongruent: " ; postfix " ms"
     #text -100 150 &StroopEffect ; prefix "Your Stroop effect is incongruent minus congruent: " ; postfix " ms"
-    text 0 0  "Task completed! Thank you for your participation."
-    text 0 50 "Press spacebar to end, and you may then leave the venue."
+    text 0 0  "This is the end of Session 1! Thank you for your participation."
+    text 0 50 "Now, you will be asked to choose your slot of Session 2."
+    text 0 150 "PRESS SPACEBAR TO PROCEED."
   end
